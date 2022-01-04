@@ -90,6 +90,23 @@ function LinedList() {
     return current.data;
   }
 
+  // 封装indexOF 根据数据查找索引 查找不到-1
+  LinedList.prototype.indexOf = function(data) {
+    let current = this.head;
+    let idx = 0;
+
+    while(current) {
+      if (current.data === data) {
+        return idx;
+      }
+
+      current = current.next;
+      idx += 1;
+    }
+    // 找不到返回-1
+    return -1;
+  }
+
   // Size方法
   LinedList.prototype.Size = function() {
     return this.length;
