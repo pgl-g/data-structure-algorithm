@@ -47,4 +47,9 @@ function LinedList() {
 
     return resultSting;
   }
+
+  // Size方法
+  LinedList.prototype.Size = function() {
+    return this.length;
+  }
 }
