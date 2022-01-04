@@ -48,6 +48,35 @@ function LinedList() {
     return resultSting;
   }
 
+
+  // inster (根据下标进行插入)
+  LinedList.prototype.inster = function(index, data) {
+    // 越界判断
+    if (index < 0 || index > this.length) return false;
+    // 获取数据对象
+    let newNode = new Node(data);
+    // 插入的位置是否是第一个
+    if (index == 0) {
+      // 头就是第一个
+      newNode.next = this.head;
+      this.head = newNode;
+    } else {
+      // 插入其他位置
+      let currentIndex = 0; // 定义下标
+      let current = this.head; 
+      let previous = null;
+      while(currentIndex++ < index) {
+        previous = current;
+        current = current.next;
+      } 
+      newNode.next = current;
+      previous.next = newNode;
+    }
+    this.length += 1;
+
+    return true;
+  }
+
   // Size方法
   LinedList.prototype.Size = function() {
     return this.length;
