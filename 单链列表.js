@@ -107,6 +107,25 @@ function LinedList() {
     return -1;
   }
 
+  // update 根据下标以及新元素 修改某个元素
+  LinedList.prototype.update = function(index, newData) {
+
+    // 如有下标 都要进行越界判断
+    if (index < 0 || index > this.length) return false;
+    // 查找正确的节点
+    let current = this.head;
+    let idx = 0;
+    
+    while(idx++ < index) {
+      current = current.next;
+      idx += 1;
+    }
+    current.data = newData;
+    return true;
+  }
+
+
+
   // Size方法
   LinedList.prototype.Size = function() {
     return this.length;
