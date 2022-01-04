@@ -32,4 +32,19 @@ function LinedList() {
 
     this.length += 1;
   }
+
+
+  // toString
+  LinedList.prototype.toString = function() {
+    let current = this.head;
+    let resultSting = '';
+    // 当为空的时候停止循环
+    while(current) {
+      resultSting += current.data + '';
+      // 还得指向下一次
+      current = current.next;
+    }
+
+    return resultSting;
+  }
 }
