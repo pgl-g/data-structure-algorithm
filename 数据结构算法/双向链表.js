@@ -1,4 +1,4 @@
-
+  
 
 
 // 双向链表
@@ -32,6 +32,37 @@ function DoublyLineList() {
 
     this.length += 1;
   }
+
+  // inster 方法 (根据下标，插入的元素)
+  DoublyLineList.prototype.inster = function(index, data) {
+    // 越界判断
+    if (index < 0 || index > this.length) return false;
+    
+    // 获取新的元素
+    let newNode = new Node(data);
+
+    // 判断是否是插入的第一个
+    if (this.length == 0) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      // 有数据的情况下，插入是否是第一个
+      if (index == 0) {
+        this.head.prevs = newNode;
+        newNode.next = this.head;
+        this.head = newNode;
+      } else if (index == this.length) {
+        // 有数据的情况下，插入是否是最后一个
+        newNode.prevs = this.tail;
+        this.tail.next = newNode;
+        this.tail = newNode;
+      } else {
+        // 最新的节点插入中间的位置
+      }
+    }
+
+  }
+
 
   // toString
   DoublyLineList.prototype.toString = function() {
