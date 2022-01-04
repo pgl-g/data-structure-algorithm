@@ -58,8 +58,21 @@ function DoublyLineList() {
         this.tail = newNode;
       } else {
         // 最新的节点插入中间的位置
+        let current = this.head;
+        let idx = 0;
+        while(idx++ < index) {
+          current = current.next;
+        }
+        // 修改指针
+        newNode.next = current;
+        newNode.prevs = current.prevs;
+        current.prevs.next = newNode; 
+        current.prevs = newNode;
       }
     }
+
+    this.length += 1;
+    return true;
 
   }
 
