@@ -77,6 +77,19 @@ function LinedList() {
     return true;
   }
 
+
+  // get 获取data数据 根据下标
+  LinedList.prototype.get = function(index) {
+    // 越界判断
+    if (index < 0 || index >= this.length) return null;
+    let idx = 0;
+    let current = this.head;
+    while(idx++ < index) {
+      current = current.next;
+    }
+    return current.data;
+  }
+
   // Size方法
   LinedList.prototype.Size = function() {
     return this.length;
