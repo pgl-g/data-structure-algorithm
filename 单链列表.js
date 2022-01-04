@@ -125,6 +125,42 @@ function LinedList() {
   }
 
 
+  // removeAt(index) 从列表特定位置删除
+  LinedList.prototype.removeAt = function(index) {
+    // 越界判断
+    if (index < 0 || index >= this.length) return null;
+
+    // 判断是否删除的是第一个节点
+    if (index == 0) {
+      this.head = this.head.next;
+    } else {
+      let current = this.head;
+      let idx = 0;
+      let previous = null; // 暂存一个节点
+      while(idx++ < index) {
+        previous = current;
+        current = current.next;
+      }
+      // 前一个节点指向current.next;
+      previous.next = current.next;
+    }
+
+    this.length -= 1;
+    return current.data;
+  }
+
+
+  // remove(ele) 删除某一项 根据某一项值，获取下标进行删除
+  LinedList.prototype.remove = function(ele) {
+
+
+    // 获取值的下标位置
+    let index = this.indexOf(ele);
+    
+    // 直接调用removeAt直接
+    return this.removeAt(index);
+  }
+
 
   // Size方法
   LinedList.prototype.Size = function() {
