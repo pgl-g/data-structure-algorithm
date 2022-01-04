@@ -3,8 +3,6 @@
 
 // 双向链表
 function DoublyLineList() {
-  
-
   // 定义一个内部类
   function Node(data) {
     this.data = data;
@@ -33,5 +31,36 @@ function DoublyLineList() {
     }
 
     this.length += 1;
+  }
+
+  // toString
+  DoublyLineList.prototype.toString = function() {
+    return this.backwardString();
+  }
+
+  // backwardString方法
+  DoublyLineList.prototype.backwardString = function() {
+    // 定义变量
+    let current = this.head;
+    let resultString = '';
+
+    while(current) {
+      resultString += current.data + ' ';
+      current = current.next;
+    }
+    
+    return resultString;
+  }
+
+  // forwardString方法
+  DoublyLineList.prototype.forwardString = function() {
+    let current = this.tail;
+    let resultString = '';
+
+    while (current) {
+      resultString += current.data + ' ';
+      current = current.prev;
+    }
+    return resultString;
   }
 }
