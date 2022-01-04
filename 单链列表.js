@@ -52,4 +52,9 @@ function LinedList() {
   LinedList.prototype.Size = function() {
     return this.length;
   }
+
+  // isEmpty 判断数据中是否含有
+  LinedList.prototype.isEmpty = function() {
+    return this.length == 0;
+  }
 }
