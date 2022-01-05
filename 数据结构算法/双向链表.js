@@ -1,6 +1,4 @@
   
-
-
 // 双向链表
 function DoublyLineList() {
   // 定义一个内部类
