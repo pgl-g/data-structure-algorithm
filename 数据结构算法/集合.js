@@ -67,4 +67,25 @@ function Set() {
   Set.prototype.value = function() {
     return Object.keys(this.items);
   }
+
+  // 并集
+  Set.prototype.union = function(otherSet) {
+    // 创建当前的集合对象 A
+    // 创建新的集合对象B
+    let newObject = new Set();
+
+    // 集合A
+    let valus = newObject.value();
+    for (let i = 0; i < valus.length; i++) {
+      newObject.add(valus[i])
+    }
+
+    // 集合B
+    valus = otherSet.value();
+    for (let i = 0; i < valus.length; i++) {
+      newObject.add(valus[i])
+    }
+
+    return newObject;
+  }
 }
