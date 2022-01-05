@@ -132,6 +132,24 @@ function DoublyLineList() {
   }
 
 
+
+  // 修改某一个位置的元素
+  DoublyLineList.prototype.update = function(newData, index) {
+    // 越界判断
+    if (index < 0 || index > this.length) return false;
+
+    // 查找正确的节点
+    let current = this.head;
+    let idx = 0;
+    while(idx++ < index) {
+      current = current.next;
+    }
+
+    current.data = newData;
+
+    return true;
+  }
+
   // 从列表中删除某一项
   DoublyLineList.prototype.remove = function(ele) {
 
