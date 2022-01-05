@@ -105,6 +105,50 @@ function DoublyLineList() {
     return -1;
   }
 
+
+  // removeAt 根据列表特定位置删除一项
+  DoublyLineList.prototype.removeAt = function(index) {
+    // 越界判断
+    if (index < 0 || index > this.length) return false;
+  
+    // 是否删除第一个节点
+    if (index == 0) {
+      this.head = this.head.next;
+    } else {
+      let idx = 0;
+      let current = this.head;
+      let previous = null;
+      while(idx++ < index) {
+        previous = current;
+        current = current.next;
+      }
+      // 前一个节点指向current.next;
+      previous.next = current.next;
+    }
+
+    this.length -= 1;
+
+    return true;
+  }
+
+
+  // 从列表中删除某一项
+  DoublyLineList.prototype.remove = function(ele) {
+
+    // 从列表中找到数据源位置
+    let index = this.indexOf(ele);
+    
+    return this.removeAt(index);
+  }
+
+  DoublyLineList.prototype.size = function() {
+    return this.length;
+  }
+
+  
+  DoublyLineList.prototype.isEmpty = function() {
+    return this.length == 0;
+  }
   // toString
   DoublyLineList.prototype.toString = function() {
     return this.backwardString();
