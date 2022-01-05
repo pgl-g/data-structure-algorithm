@@ -74,6 +74,36 @@ function DoublyLineList() {
 
   }
 
+  // get 根据下标进行返回数据
+  DoublyLineList.prototype.get = function(index) {
+    // 越界判断
+    if (index < 0 || index >= this.length) return null;
+    
+    // 获取元素
+    let current = this.head;
+    let idx = 0;
+
+    while (idx++ < index) {
+      current = current.next;
+    }
+    return current.data;
+  }
+
+
+  // indexOf 根据索引 返回-1
+  DoublyLineList.prototype.indexOf = function(data) {
+    let current = this.head;
+    let idx = 0;
+    while(current) {
+      if (current.data == data) {
+        return idx;
+      }
+      idx += 1;
+      current = current.next;
+    }
+
+    return -1;
+  }
 
   // toString
   DoublyLineList.prototype.toString = function() {
