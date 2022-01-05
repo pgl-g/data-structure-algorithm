@@ -62,4 +62,9 @@ function Set() {
   Set.prototype.size = function() {
     return Object.keys(this.items).length;
   }
+
+  // value 返回所有的值
+  Set.prototype.value = function() {
+    return Object.keys(this.items);
+  }
 }
