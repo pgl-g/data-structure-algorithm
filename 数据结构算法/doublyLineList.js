@@ -106,37 +106,42 @@ function DoublyLineList() {
   }
 
 
-  // removeAt 根据列表特定位置删除一项
+  // removeAt 根据列表特定位置删除一项(重点)
   DoublyLineList.prototype.removeAt = function(index) {
     // 越界判断
-    if (index < 0 || index > this.length) return false;
+    if (index < 0 || index >= this.length) return null;
   
-    // 是否删除第一个节点
-    if (index == 0) {
+    // 判断函数中是否函数数据 
+    let current = this.head;
+    if (this.length == 0) {
+      this.head = null;
+      this.tail = null;
+    } else if (index == 0) {
+      // 1. 删除是否是第一项
+      this.head.next.prevs = null;
       this.head = this.head.next;
+    } else if (index == this.length - 1) {
+      // 2. 删除是否是最后一项
+      current = this.tail;
+      this.tail.prevs.next = null;
+      this.tail = this.tail.prevs;
     } else {
+      // 从中间删除
       let idx = 0;
-      let current = this.head;
-      let previous = null;
       while(idx++ < index) {
-        previous = current;
         current = current.next;
       }
-      // 前一个节点指向current.next;
-      previous.next = current.next;
+      current.prevs.next = current.next;
+      current.next.prevs = current.prevs;
     }
-
     this.length -= 1;
-
-    return true;
+    return current.data;
   }
 
-
-
-  // 修改某一个位置的元素
+  // update修改某一个位置的元素
   DoublyLineList.prototype.update = function(newData, index) {
     // 越界判断
-    if (index < 0 || index > this.length) return false;
+    if (index < 0 || index >= this.length) return false;
 
     // 查找正确的节点
     let current = this.head;
@@ -150,7 +155,7 @@ function DoublyLineList() {
     return true;
   }
 
-  // 从列表中删除某一项
+  // remove从列表中删除某一项
   DoublyLineList.prototype.remove = function(ele) {
 
     // 从列表中找到数据源位置
@@ -159,11 +164,12 @@ function DoublyLineList() {
     return this.removeAt(index);
   }
 
+  // size 返回长度
   DoublyLineList.prototype.size = function() {
     return this.length;
   }
 
-  
+  // isEmpty是否为空
   DoublyLineList.prototype.isEmpty = function() {
     return this.length == 0;
   }
