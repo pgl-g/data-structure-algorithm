@@ -21,8 +21,6 @@
 
 
 function Set() {
-  
-
   // 属性
   this.items = {};
 
@@ -87,5 +85,27 @@ function Set() {
     }
 
     return newObject;
+  }
+
+
+  // 交集
+  Set.prototype.interSection = function(otherObj) {
+    /**
+     * a集合 b集合 抽取公共的数据
+     */
+    // 收集器
+    let resultSection = new Set();
+    
+    // 获取a集合
+    let values = this.value();
+
+    for (let i = 0; i < values.length; i++) {
+      if (otherObj.has(values[i])) {
+        resultSection = values[i];
+      }
+    }
+
+    return resultSection;
+
   }
 }
