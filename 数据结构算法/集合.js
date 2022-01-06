@@ -101,11 +101,33 @@ function Set() {
 
     for (let i = 0; i < values.length; i++) {
       if (otherObj.has(values[i])) {
-        resultSection = values[i];
+        resultSection.add(values[i]);
+      }
+    }
+    return resultSection;
+
+  }
+
+  /**
+   * 差集
+   *  1. 创建一个新的集合，
+   *  2. 遍历集合A中的所有元素，判断是否在集合B中
+   *  3. 不存在集合B中，将该元素添加到新集合中
+   *  最后将新集合返回
+   */
+  Set.prototype.differenceSet = function(otherSet) {
+
+    let resultSet = new Set();
+
+    // 集合A
+    let values = this.value();
+
+    for (let i = 0; i < values.length; i++) {
+      if (!otherSet.has(values[i])) {
+        resultSet.add(values[i]);
       }
     }
 
-    return resultSection;
-
+    return resultSet;
   }
 }
