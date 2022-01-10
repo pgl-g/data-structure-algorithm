@@ -2,6 +2,8 @@
  * hash表实现
  * 
  * 采用链地址法来实现hash表
+ * ‘
+ * 使用质数进行下标存值原因： 1. 素数可以有效的减少hash冲突
  */
 
 /**
@@ -45,7 +47,7 @@ function HashTable() {
 
     let currentIndex = this.hashFn(key, this.limit);
 
-    let   = this.storage[currentIndex];
+    let bucket = this.storage[currentIndex];
 
     if (bucket == null) {
       bucket = [];
