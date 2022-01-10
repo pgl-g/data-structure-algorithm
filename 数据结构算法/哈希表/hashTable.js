@@ -64,6 +64,11 @@ function HashTable() {
     bucket.push([key, value]);
 
     this.count += 1;
+
+    // 判断元素是否需要扩容
+    if (this.count > this.limit * 0.75) {
+      this.reSize(this.limit * 2);
+    }
   }
 
 
@@ -104,7 +109,14 @@ function HashTable() {
           this.count--;
           return tuple[1];
         } 
+       
       }
+
+       // 如果数据过多，哈希减容操作
+      if (this.limit > 7 && this.count < this.limit * 0.25) {
+        this.reSize(Math.floor(this.limit / 2))
+      }
+
       // 没有找到，直接返回
       return null;
     }
@@ -117,6 +129,35 @@ function HashTable() {
       return this.count;
     }
 
+
+    // 哈希表扩容/减容
+    HashTable.prototype.reSize = function(newLimit) {
+      // 存老哈希
+      let oldStroage = this.storage;
+
+      // 初始化新哈希
+      this.storage = [];
+      this.count = 0;
+      this.limit = newLimit;
+
+      // 遍历老哈希
+      for (let i = 0; i < oldStroage.length; i++) {
+       
+        // 判断里面的bucket中是否为null
+        let bucket = oldStroage[i];
+        // 如果有直接继续执行循环
+        if (bucket == null) {
+          continue;
+        }
+
+        for (let j = 0; j < bucket.length; j++) {
+          const tuple = bucket[j];
+          this.put(tuple[0], tuple[1]);
+          this.count += 1;
+        }
+
+      }
+    }
 
 }
 
