@@ -53,9 +53,9 @@ function HashTable() {
    }
 
     for (let i = 0; i < bucket.length; i++) {
-      let tuble = bucket[i];
-      if (tuble[0] == key) {
-        tuble[i] = value;
+      const tuple = bucket[i];
+      if (tuple[0] == key) {
+        tuple[i] = value;
         return;
       }
     }
@@ -65,6 +65,28 @@ function HashTable() {
 
     this.count += 1;
   }
+
+
+  /**
+   * 根据key查找bucket =》判断bucket是否为null =》在查找返回
+   */
+
+    HashTable.prototype.get = function(key) {
+
+      let index = this.hashFn(key, this.limit);
+
+      let bucket = this.storage[index];
+
+      if (bucket == null) return null;
+      
+      for (let i = 0; i < bucket.length; i++) {
+        const tuple = bucket[i];
+        if (tuple[0] == key) {
+          return tuple[1];
+        } 
+      }
+      return null;
+    }
 
 }
 
