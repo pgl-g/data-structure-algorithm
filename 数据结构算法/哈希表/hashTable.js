@@ -13,7 +13,7 @@ function HashTable() {
   // 属性
   this.storage = []; // 数组中存放相关的元素
   this.count = 0; // 当前已经存在了多少数据 记录bucket中长度
-  this.limit = 5; // 初始设置数组的长度
+  this.limit = 7; // 初始设置数组的长度
 
   // 方法 / 哈希函数
   HashTable.prototype.hashFn = function(str, size) {
@@ -45,7 +45,7 @@ function HashTable() {
 
     let currentIndex = this.hashFn(key, this.limit);
 
-    let bucket = this.storage[currentIndex];
+    let   = this.storage[currentIndex];
 
     if (bucket == null) {
       bucket = [];
@@ -119,4 +119,8 @@ function HashTable() {
 
 
 }
+
+const result = new HashTable();
+
+result.hashFn('abc');
 
