@@ -67,7 +67,13 @@ function HashTable() {
 
     // 判断元素是否需要扩容
     if (this.count > this.limit * 0.75) {
-      this.reSize(this.limit * 2);
+      let newLimit = this.limit * 2
+      // 判断是否是质数
+      if (this.isPrime(newLimit)) {
+        this.reSize(newLimit);
+      } else {
+        this.reSize(newLimit + 1);
+      }
     }
   }
 
@@ -157,6 +163,19 @@ function HashTable() {
         }
 
       }
+    }
+
+    // 判断是否是质数
+    HashTable.prototype.isPrime = function(num) {
+      let temp = parseInt(Math.sqrt(num));
+
+      for (let i = 0; i < temp; i++) {
+        if (temp % i == 0) {
+          return false
+        }
+      }
+
+      return true;
     }
 
 }
