@@ -68,12 +68,9 @@ function HashTable() {
     // 判断元素是否需要扩容
     if (this.count > this.limit * 0.75) {
       let newLimit = this.limit * 2
+      let newPrime = this.getPrime(newLimit);
       // 判断是否是质数
-      if (this.isPrime(newLimit)) {
-        this.reSize(newLimit);
-      } else {
-        this.reSize(newLimit + 1);
-      }
+      this.reSize(newPrime);
     }
   }
 
@@ -120,7 +117,9 @@ function HashTable() {
 
        // 如果数据过多，哈希减容操作
       if (this.limit > 7 && this.count < this.limit * 0.25) {
-        this.reSize(Math.floor(this.limit / 2))
+        let newSize = Math.floor(this.limit / 2);
+        let newPrime = this.getPrime(newSize);
+        this.reSize(newPrime);
       }
 
       // 没有找到，直接返回
@@ -176,6 +175,15 @@ function HashTable() {
       }
 
       return true;
+    }
+
+    // 获取质数
+    HashTable.prototype.getPrime = function(num) {
+      while(!this.isPrime(num)) {
+        num++;
+      }
+
+      return num;
     }
 
 }
