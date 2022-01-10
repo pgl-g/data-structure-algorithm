@@ -12,7 +12,7 @@
 function HashTable() {
   // 属性
   this.storage = []; // 数组中存放相关的元素
-  this.count = 0; // 当前已经存在了多少数据
+  this.count = 0; // 当前已经存在了多少数据 记录bucket中长度
   this.limit = 5; // 初始设置数组的长度
 
   // 方法 / 哈希函数
@@ -55,7 +55,7 @@ function HashTable() {
     for (let i = 0; i < bucket.length; i++) {
       const tuple = bucket[i];
       if (tuple[0] == key) {
-        tuple[i] = value;
+        tuple[1] = value;
         return;
       }
     }
@@ -85,8 +85,30 @@ function HashTable() {
           return tuple[1];
         } 
       }
+      // 没有找到，直接返回
       return null;
     }
+
+    HashTable.prototype.remove = function(key) {
+
+      let index = this.hashFn(key, this.limit);
+
+      let bucket = this.storage[index];
+
+      if (bucket == null) return null;
+      
+      for (let i = 0; i < bucket.length; i++) {
+        const tuple = bucket[i];
+        if (tuple[0] == key) {
+          bucket.splice(i, 1);
+          this.count--;
+          return tuple[1];
+        } 
+      }
+      // 没有找到，直接返回
+      return null;
+    }
+
 
 }
 
