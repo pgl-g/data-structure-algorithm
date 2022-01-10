@@ -22,5 +22,23 @@
 
 // 案例三：使用一种数据结构存储单词信息，比如有50000个单词，找到单词后每个单词有自己的翻译&读音&应用等等
 
+// 1. 字符串 =》比较大的数字：hashcode
+// 2. 将大的数子hascode压缩到数组范围(size )之内
+function hashFn(str, size) {
 
-// 哈希化
+  let hashCode = 0;
+  
+  // 将字符串转 => 数字 unicode
+  for (let i = 0; i < str.length; i++) {
+    console.log(str.charCodeAt(i))
+    hashCode = 37 * hashCode + str.charCodeAt(i);
+  }
+
+  // 取余操作
+  let index = hashCode % size;
+
+  return index;
+}
+
+
+// console.log(hashFn('str', 4))
