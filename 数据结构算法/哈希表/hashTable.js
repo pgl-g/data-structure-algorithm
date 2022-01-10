@@ -51,7 +51,7 @@ function HashTable() {
       bucket = [];
       this.storage[currentIndex] = bucket;         
    }
-
+    // 修改
     for (let i = 0; i < bucket.length; i++) {
       const tuple = bucket[i];
       if (tuple[0] == key) {
@@ -60,7 +60,7 @@ function HashTable() {
       }
     }
 
-
+    // 新增
     bucket.push([key, value]);
 
     this.count += 1;
