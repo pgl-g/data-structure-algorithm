@@ -109,6 +109,14 @@ function HashTable() {
       return null;
     }
 
+    HashTable.prototype.isEmpty = function() {
+      return this.count == 0;
+    }
+
+    HashTable.prototype.size = function() {
+      return this.count;
+    }
+
 
 }
 
