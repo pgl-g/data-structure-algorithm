@@ -52,4 +52,64 @@ function Tree() {
       }
     }
   }
+
+  // 树遍历
+  /**
+   * 先序遍历
+   *  1. 访问其根节点
+   *  2. 先遍历左节点(左子树)
+   *  3. 遍历右节点 （右子树）
+   */
+  Tree.prototype.preOrderTranversal = function(handle) { 
+    this.preOrderTranversalNode(this.root, handle);
+  }
+
+  Tree.prototype.preOrderTranversalNode = function(node, handle) {
+    if (node !== null) {
+      // 打印当前经过的节点
+      handle(node.key);
+      // 遍历所有的左节点 (左节点遍历到底)
+      this.preOrderTranversalNode(node.left, handle);
+      // 遍历所有的右节点 （右节点遍历到底）
+      this.preOrderTranversalNode(node.right, handle);
+    }
+  }
+  // 中序遍历
+  Tree.prototype.midOrderTranversal = function(handle) {
+    this.midOrderTranversalNode(this.root, handle);
+  }
+  Tree.prototype.midOrderTranversalNode = function(node, handle) {
+    if (node !== null) {
+      // 先遍历左节点
+      this.midOrderTranversalNode(node.left, handle);
+      // 访问跟节点
+      handle(node.key);
+      // 遍历右节点
+      this.midOrderTranversalNode(node.right, handle);
+    }
+  }
+
+  // 后序遍历
+  Tree.prototype.outOrderTranveral = function(handle) {
+    this.outOrderTranveralNode(this.root, handle);
+  }
+  Tree.prototype.outOrderTranveralNode = function(node, handle) {
+    if (node !== null) {
+      // 先访问左节点
+      this.outOrderTranveralNode(node.left, handle);
+      // 访问右节点
+      this.outOrderTranveralNode(node.right, handle);
+      // 最后访问根节点
+      handle(node.key);
+    }
+  }
+
 }
+
+// 测试遍历
+const result = new Tree();
+let resultString = ''
+result.preOrderTranversal((key) => {
+  resultString += key + ' ';
+})
+console.log(resultString);
