@@ -136,13 +136,14 @@ function Tree() {
     if (node == null) return false;
 
     // 存在节点，往左查找
-    if (key < node.left.key) {
-      this.searchKey(node.left, node.left.key);
-    } else if (key > node.right.key) {
-      this.searchKey(node.right, node.right.key);
+    if (key < node.key) {
+      this.searchKey(node.left, key);
+    } else if (key > node.key) {
+      this.searchKey(node.right, key);
     } else {
       return true;
     }
+
   }
 
 }
