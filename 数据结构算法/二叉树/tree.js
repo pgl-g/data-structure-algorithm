@@ -108,7 +108,7 @@ function Tree() {
   Tree.prototype.min = function() {
     let node = this.root;
 
-    while(node.left !== null) {
+    while(node.left != null) {
       node = node.left;
     }
 
@@ -118,7 +118,7 @@ function Tree() {
   // 最大值
   Tree.prototype.max = function() {
     let node = this.root;
-    while(node.right !== null) {
+    while(node.right != null) {
       node = node.right;
     }
 
