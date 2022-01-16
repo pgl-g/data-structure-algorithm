@@ -104,6 +104,47 @@ function Tree() {
     }
   }
 
+  // 最小值
+  Tree.prototype.min = function() {
+    let node = this.root;
+
+    while(node.left !== null) {
+      node = node.left;
+    }
+
+    return node.key;
+  }
+
+  // 最大值
+  Tree.prototype.max = function() {
+    let node = this.root;
+    while(node.right !== null) {
+      node = node.right;
+    }
+
+    return node.key;
+  }
+
+  // 搜索特定的key
+  Tree.prototype.handleSearch = function(key) {
+    // 通过递归方式进行搜索
+    this.searchKey(this.root, key);
+  }
+  Tree.prototype.searchKey = function(node, key) {
+
+    // 判断是否含有节点
+    if (node == null) return false;
+
+    // 存在节点，往左查找
+    if (key < node.left.key) {
+      this.searchKey(node.left, node.left.key);
+    } else if (key > node.right.key) {
+      this.searchKey(node.right, node.right.key);
+    } else {
+      return true;
+    }
+  }
+
 }
 
 // 测试遍历
