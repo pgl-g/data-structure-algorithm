@@ -129,9 +129,19 @@ function Tree() {
   Tree.prototype.handleSearch = function(key) {
     // 通过递归方式进行搜索
     this.searchKey(this.root, key);
+
+    // 用while循环进行查询
+    // while(node != null) {
+    //   if (key < node.key) {
+    //     this.root = node.left;
+    //   } else if (key > node.key) {
+    //     this.root = node.right;
+    //   } else {
+    //     return true;
+    //   }
+    // }
   }
   Tree.prototype.searchKey = function(node, key) {
-
     // 判断是否含有节点
     if (node == null) return false;
 
@@ -143,6 +153,70 @@ function Tree() {
     } else {
       return true;
     }
+  }
+
+  /**
+   * 删除（删除节点要从查找要删的节点）
+   *  1. 该节点是叶节点（没有子节点，只有一个根节点 ） 
+   *  2. 该节点有一个子节点
+   *  3. 该节点有两个子节点
+   * 
+   * 删除操作
+   *  1. 先找到要删除的节点，如果没有找到，不需要删除
+   *  2. 找到要删除的节点
+   *    a. 删除叶子节点
+   *    b. 删除只有一个子节点的节点
+   *    c. 删除有两个子节点的节点
+   */
+
+  Tree.prototype.remove = function(key) {
+    let current = this.root;
+    let parent = null;
+    let leftChildNode = true;
+
+    // 1. 父节点的key不等于传进来的key，直接循环
+    while(current.key != key) {
+      parent = current;
+      if (key < current.key) {
+        leftChildNode = true;
+        current = current.left;
+      } else {
+        leftChildNode = false;
+        current = current.right; 
+      }
+      // 某种情况：已经找到了最后的节点，依然没有找到key
+      if (current == null) return false;
+    }
+
+    // 根据对应的情况删除节点
+    // a. 删除的是叶节点
+    if (current.left == null && current.right == null) {
+      if (current == this.root) {
+        this.root = null;
+      } else if (leftChildNode) {
+        parent.left = null;
+      } else {
+        parent.right = null;
+      }
+      // b. 删除的节点有一个子节点
+    } else if (current.right == null) {
+      if (current == this.root) {
+        this.root = current.left;
+      } else if (leftChildNode) {
+        parent.left = current.left;
+      } else {
+        parent.right = current.right;
+      }
+    } else if (current.left == null) {
+      if (current == this.root) {
+        this.root = current.right;
+      } else if (leftChildNode) {
+        parent.left = current.right;
+      } else {
+        parent.right = current.left;
+      }
+    }
+    // c. 删除有两个子节点的节点
 
   }
 
