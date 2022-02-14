@@ -46,12 +46,13 @@ function ArrayList() {
    */ 
   ArrayList.prototype.selectiongSort = () => {
     let length = this.array.length;
-
+    // [1, 12, 10, 8, 4]
     // 外层循环：从0开始取数据
     for (let j = 0; j < length - 1; j++) {
       // 内层循环：从i + 1位置开始取数据
       let min = j;
       for (let i = min + 1; i < length; i++) {
+        
         // 进行加1操作
         if (this.array[min] > this.array[i]) {
           min = i;
@@ -69,7 +70,43 @@ function ArrayList() {
   }
   
 
-  // 插入排序
+  /**
+   * 插入排序
+   * 
+   *  插入排序的思想核心是局部有序
+   * 
+   *  比如在一个队列中的人，我们选择其中一个作为标记的队员
+   *  这个被标记的队员左边的所有队员已经是局部有序
+   *  意味着，一部分人是按顺序排好的，还有一部分是没有顺序的
+   * 
+   * 思路：
+   *  1. 从第一个元素开始，该元素可以认为已经被排序
+   *  2. 取出下一个元素，在已经排序的元素序列中从后向前扫描
+   *  3. 如果该元素（已排序）大于新元素，将该元素移到下一个位置
+   *  重复上一个步骤，直到找到已排序的元素小于或等于新元素的位置
+   *  将新元素插入到该位置，重复上面的步骤
+   */
+  ArrayList.prototype.insterSort = () => {
+    let length = this.array.length;
+
+    // 外层循环：从第一个位置开始获取数据(假设第一个位置是局部有序，在进行向前插入数据)，向前面局部有序进行插入
+    for (let i = 1; i < length; i++) {
+      // 内层循环：获取i位置的元素，和前面的数据依次进行比较
+      // 因为判定第一个数据是局部有序，所以取后面所有的数据向前面的局部有序进行比较 
+      let temp = this.array[i]; // 存储每一项
+      let j = i;
+      while (this.array[j - 1] > temp && j > 0 ) {
+        this.array[j] = this.array[j - 1];
+        j--;
+      }
+
+      // 将j位置的数据，放置temp就可以了(前面小于后面直接放到后面)
+      this.array[j] = temp;
+    }
+  }
+
+
+
 
   // 希尔排序
 
@@ -87,5 +124,6 @@ list.inster(8);
 list.inster(4);
 list.toStrings();
 // list.bubblingSort();
-list.selectiongSort();
+// list.selectiongSort();
+list.insterSort();
 console.log(list.array)
