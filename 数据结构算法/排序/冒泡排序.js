@@ -38,10 +38,36 @@ function ArrayList() {
         }
      }
     }
-    
   }
 
-  // 选择排序
+  /**
+   * 选择排序
+   * 
+   */ 
+  ArrayList.prototype.selectiongSort = () => {
+    let length = this.array.length;
+
+    // 外层循环：从0开始取数据
+    for (let j = 0; j < length - 1; j++) {
+      // 内层循环：从i + 1位置开始取数据
+      let min = j;
+      for (let i = min + 1; i < length; i++) {
+        // 进行加1操作
+        if (this.array[min] > this.array[i]) {
+          min = i;
+        }
+      }
+      // 跳出循环
+      const temps = this.array[min];
+
+      this.array[min] = this.array[j];
+
+      this.array[j] = temps;
+    }
+
+    
+  }
+  
 
   // 插入排序
 
@@ -60,5 +86,6 @@ list.inster(10);
 list.inster(8);
 list.inster(4);
 list.toStrings();
-list.bubblingSort();
+// list.bubblingSort();
+list.selectiongSort();
 console.log(list.array)
