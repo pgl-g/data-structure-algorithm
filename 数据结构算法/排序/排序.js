@@ -116,7 +116,85 @@ function ArrayList() {
 
 
 
-  // 快速排序
+  /**
+   * 交换位置
+   */
+  ArrayList.prototype.swap = function(n, m) {
+    if (this.array[n] > this.array[m]) {
+      const temp = this.array[n];
+      this.array[n] = this.array[m];
+      this.array[m] = temp;
+    }
+  }
+
+
+  /**
+   * 快速排序
+   * 1.先选择枢纽
+   */ 
+  ArrayList.prototype.median = function(left, right) {
+    // 1.先选择枢纽
+    const center = Math.floor((left + right) / 2);
+    // 2. 判断枢纽位置
+    if (this.array[left] > this.array[right]) {
+      this.swap(left, right);
+    }
+
+    if (this.array[center] > this.array[right]) {
+      this.swap(center, right);
+    }
+
+    if (this.array[left] > this.array[center]) {
+      this.swap(left, center);
+    }
+
+    // 3. 将center位置换到right - 1的位置
+    this.swap(center, right - 1);
+    // 4. 特殊枢纽位置进行排序
+    return this.array[right - 1];
+  }
+
+  /**
+   * 快速排序实现
+   */ 
+  ArrayList.prototype.quickSort = function() {
+    this.quick(0, this.array[length -  1]);
+  }
+
+  ArrayList.prototype.quick = function(left, right) {
+    // 1. 结束条件
+    if (left >= right) return;
+
+    // 2. 获取枢纽
+    const pivot = this.median(left, right);
+
+    // 3. 定义变量，用于记录当前找到的位置
+    let i = left;
+    let j = right - 1; // 指向枢纽的位置
+
+    // 4. 开始进行交换
+    while(true) {
+      while(this.array[++i] < pivot) {};
+      while(this.array[--j > pivot]) {};
+
+      // 左边小于右边
+      if (i < j) {
+        this.swap(i, j);
+      } else {
+        // 大于等于时直接跳出循环，这时i的位置再枢纽的位置
+        break;
+      }
+    }
+
+    // 5. 将枢纽的位置 放置正确的位置，i的位置
+    this.swap(i, right - 1);
+
+    // 6. 现在枢纽正确的位置已经确定，在进行枢纽两边进行递归 同等操作进行排序
+    this.quick(left, i - 1);
+    this.quick(i + 1, right);
+  }
+
+
 }
 
 // 测试类
