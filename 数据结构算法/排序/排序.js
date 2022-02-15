@@ -107,24 +107,13 @@ function ArrayList() {
 
 
 
-
-  /**
-   * 希尔排序 基于插入排序
-   */
-  
-
-
-
-
   /**
    * 交换位置
    */
   ArrayList.prototype.swap = function(n, m) {
-    if (this.array[n] > this.array[m]) {
-      const temp = this.array[n];
-      this.array[n] = this.array[m];
-      this.array[m] = temp;
-    }
+    const temp = this.array[n];
+    this.array[n] = this.array[m];
+    this.array[m] = temp;
   }
 
 
@@ -156,6 +145,8 @@ function ArrayList() {
 
   /**
    * 快速排序实现
+   * 效率：O(N* logN)
+   * 
    */ 
   ArrayList.prototype.quickSort = function() {
     this.quick(0, this.array[length -  1]);
